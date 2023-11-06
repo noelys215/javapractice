@@ -1,21 +1,18 @@
 public class MainChallenge {
+    /* Challenge */
     public static void main(String[] args) {
-        int highScore = calcScore(true, 800, 5, 100);
-
-        System.out.println("1st High Score: " + highScore);
-        System.out.println("2nd High Score: " + calcScore(true, 10_000, 8, 200));
+        System.out.println(displayHighScorePosition("Asuka", calcHighScorePosition(1500)));
+        System.out.println(displayHighScorePosition("Rei", calcHighScorePosition(1000)));
+        System.out.println(displayHighScorePosition("Shinji", calcHighScorePosition(500)));
+        System.out.println(displayHighScorePosition("Mari", calcHighScorePosition(100)));
     }
 
-    /* METHOD */
-    public static int calcScore(boolean gameOver, int score, int levelCompleted, int bonus) {
-        int finalScore = score;
+    public static int calcHighScorePosition(int score) {
+        return score >= 1000 ? 1 : score >= 500 ? 2 : score >= 100 ? 3 : 4;
+    }
 
-        if (gameOver) {
-            finalScore += (levelCompleted * bonus);
-            finalScore += 1000;
-        }
-
-        return finalScore;
+    public static String displayHighScorePosition(String playerName, int playerPosition) {
+        return playerName + " managed to get into position " + playerPosition + " on the score list";
     }
 
 }
