@@ -4,7 +4,7 @@ public class MainChallenge {
     }
 
     public static double convertToCent(int feet, int inches) {
-        return (feet >= 0 && inches >= 0 && inches < 12) ? convertToCent(feet * 12 + inches) : -1;
+        return convertToCent(feet * 12 + inches);
     }
 
 
