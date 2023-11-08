@@ -1,19 +1,16 @@
 public class MainChallenge {
-    public static boolean hasTeen(int num1, int num2, int num3) {
-        return isTeen(num1) || isTeen(num2) || isTeen(num3);
+    public static double convertToCent(int inches) {
+        return inches * 2.54;
     }
 
-    public static boolean isTeen(int num1) {
-        return (num1 >= 13 && num1 <= 19);
+    public static double convertToCent(int feet, int inches) {
+        return (feet >= 0 && inches >= 0 && inches < 12) ? convertToCent(feet * 12 + inches) : -1;
     }
 
 
     public static void main(String[] args) {
-        System.out.println(hasTeen(9, 99, 19));  // should return true
-        System.out.println(hasTeen(25, 15, 42));  // should return true
-        System.out.println(hasTeen(22, 23, 34)); // should return true
-        System.out.println(isTeen(9)); // should return true
-        System.out.println(isTeen(13)); // should return true
+        System.out.println(convertToCent(68)); // Convert 68 inches to centimeters
+        System.out.println(convertToCent(5, 8)); // Convert 5 feet 8 inches to centimeters
     }
 
 }
