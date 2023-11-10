@@ -15,7 +15,7 @@ public class Main {
             case 7 -> "SEVEN";
             case 8 -> "EIGHT";
             case 9 -> "NINE";
-            default -> "OTHER";
+            default -> "other";
         });
     }
 
