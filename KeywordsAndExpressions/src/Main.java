@@ -3,8 +3,8 @@ public class Main {
         printNumberInWord(-1);
     }
 
-    public static void printNumberInWord(int num) {
-        String numb = switch (num) {
+    public static void printNumberInWord(int number) {
+        System.out.println(switch (number) {
             case 0 -> "ZERO";
             case 1 -> "ONE";
             case 2 -> "TWO";
@@ -13,11 +13,10 @@ public class Main {
             case 5 -> "FIVE";
             case 6 -> "SIX";
             case 7 -> "SEVEN";
-            case 8 -> "Eight";
-            case 9 -> "Nine";
-            default -> "other";
-        };
-        System.out.println(numb);
+            case 8 -> "EIGHT";
+            case 9 -> "NINE";
+            default -> "OTHER";
+        });
     }
 
 
