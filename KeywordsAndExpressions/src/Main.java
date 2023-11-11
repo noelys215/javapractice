@@ -1,22 +1,23 @@
 public class Main {
     public static void main(String[] args) {
-        printDayOfWeek(0);
+        printNumberInWord(-1);
     }
 
-    public static void printDayOfWeek(int day) {
-        String dayOfWeek = switch (day) {
-            case 0 -> {
-                yield "Sunday";
-            }
-            case 1 -> "Monday";
-            case 2 -> "Tuesday";
-            case 3 -> "Wednesday";
-            case 4 -> "Thursday";
-            case 5 -> "Friday";
-            case 6 -> "Saturday";
-            default -> "No day found.";
+    public static void printNumberInWord(int num) {
+        String numb = switch (num) {
+            case 0 -> "ZERO";
+            case 1 -> "ONE";
+            case 2 -> "TWO";
+            case 3 -> "THREE";
+            case 4 -> "FOUR";
+            case 5 -> "FIVE";
+            case 6 -> "SIX";
+            case 7 -> "SEVEN";
+            case 8 -> "Eight";
+            case 9 -> "Nine";
+            default -> "other";
         };
-        System.out.println(dayOfWeek);
+        System.out.println(numb);
     }
 
 
