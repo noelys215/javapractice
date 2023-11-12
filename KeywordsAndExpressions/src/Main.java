@@ -1,27 +1,26 @@
 public class Main {
+    public static int sumDigits(int number) {
+        if (number < 0) return -1;
 
-    public static void main(String[] args) {
-        int evenNum = 0;
-        int oddNum = 0;
-        int i = 4;
 
-        while (i <= 20) {
-            i++;
-            if (isEvenNumber(i)) {
-                System.out.println(i);
-                evenNum += 1;
+        int sum = 0;
 
-            }
-            if (!isEvenNumber(i)) oddNum += 1;
-            if (evenNum >= 5) break;
+        while (number > 0) {
+            // Extract the least-significant digit
+            int digit = number % 10;
+            sum += digit;
 
+            // Remove the least-significant digit
+            number /= 10;
         }
-        System.out.println("Even Numbers: " + evenNum);
-        System.out.println("Odd Numbers: " + oddNum);
+        return sum;
     }
 
-    public static boolean isEvenNumber(int num) {
-        return num % 2 == 0;
+    public static void main(String[] args) {
+        System.out.println("Sum of the digits in 125 is " + sumDigits(125));
+        System.out.println("Sum of the digits in -125 is " + sumDigits(-125));
+        System.out.println("Sum of the digits in 4 is " + sumDigits(4));
+        System.out.println("Sum of the digits in 4 is " + sumDigits(1000));
     }
 
 
