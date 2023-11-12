@@ -1,31 +1,21 @@
 public class Main {
 
     public static void main(String[] args) {
-        int primeCount = 0;
+        int sum = 0;
+        int count = 0;
 
-        // Loop through a range of numbers (e.g., 1 to 1000)
         for (int i = 1; i <= 1000; i++) {
-            if (isPrime(i)) {
-                System.out.println(i + " is a prime number");
-                primeCount++;
+            if (i % 3 == 0 && i % 5 == 0) {
+                sum += i;
+                count++;
+                System.out.println("Number found: " + i);
 
-                // Exit the loop if three prime numbers are found
-                if (primeCount == 3) {
+                if (count == 5) {
                     break;
                 }
             }
         }
-    }
 
-    public static boolean isPrime(int wholeNumber) {
-        if (wholeNumber < 2) {
-            return false;
-        }
-        for (int divisor = 2; divisor <= Math.sqrt(wholeNumber); divisor++) {
-            if (wholeNumber % divisor == 0) {
-                return false;
-            }
-        }
-        return true;
+        System.out.println("Sum of numbers that met the conditions: " + sum);
     }
 }
