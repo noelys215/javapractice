@@ -1,22 +1,28 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(sumOdd(1, 100));
-    }
+        int evenNum = 0;
+        int oddNum = 0;
+        int i = 4;
 
+        while (i <= 20) {
+            i++;
+            if (isEvenNumber(i)) {
+                System.out.println(i);
+                evenNum += 1;
 
-    public static boolean isOdd(int number) {
-        return number > 0 && number % 2 != 0;
-    }
+            }
+            if (!isEvenNumber(i)) oddNum += 1;
+            if (evenNum >= 5) break;
 
-    public static int sumOdd(int start, int end) {
-        if (start > end || start <= 0 || end <= 0) return -1;
-
-        int sum = 0;
-        for (int i = start; i <= end; i++) {
-            if (isOdd(i)) sum += i;
         }
-        return sum;
-
+        System.out.println("Even Numbers: " + evenNum);
+        System.out.println("Odd Numbers: " + oddNum);
     }
+
+    public static boolean isEvenNumber(int num) {
+        return num % 2 == 0;
+    }
+
+
 }
