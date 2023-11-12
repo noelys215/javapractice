@@ -1,13 +1,17 @@
 public class MainChallenge {
-    public static boolean isCatPlaying(boolean summer, int temperature) {
-        int upperLimit = summer ? 45 : 35;
-        return temperature >= 25 && temperature <= upperLimit;
+    public static boolean isLeapYear(int year) {
+        return year >= 1 && year <= 9999 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
     }
 
-    public static void main(String[] args) {
-        System.out.println(isCatPlaying(true, 10));
-        System.out.println(isCatPlaying(false, 36));
-        System.out.println(isCatPlaying(false, 35));
+    public static int getDaysInMonth(int month, int year) {
+        if (month < 1 || month > 12 || year < 1 || year > 9999) {
+            return -1;
+        }
+        return switch (month) {
+            case 2 -> isLeapYear(year) ? 29 : 28;
+            case 4, 6, 9, 11 -> 30;
+            default -> 31;
+        };
     }
 
 }
