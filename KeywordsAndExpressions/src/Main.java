@@ -1,21 +1,25 @@
 public class Main {
 
     public static void main(String[] args) {
-        int sum = 0;
-        int count = 0;
+        System.out.println(sumOdd(1, 100));
+    }
 
-        for (int i = 1; i <= 1000; i++) {
-            if (i % 3 == 0 && i % 5 == 0) {
-                sum += i;
-                count++;
-                System.out.println("Number found: " + i);
 
-                if (count == 5) {
-                    break;
-                }
-            }
+    public static boolean isOdd(int number) {
+        if (number <= 0) {
+            return false;
         }
+        return number % 2 != 0;
+    }
 
-        System.out.println("Sum of numbers that met the conditions: " + sum);
+    public static int sumOdd(int start, int end) {
+        if (start > end || start <= 0 || end <= 0) return -1;
+
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            if (isOdd(i)) sum += i;
+        }
+        return sum;
+
     }
 }
