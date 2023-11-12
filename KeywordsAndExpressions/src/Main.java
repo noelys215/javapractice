@@ -6,10 +6,7 @@ public class Main {
 
 
     public static boolean isOdd(int number) {
-        if (number <= 0) {
-            return false;
-        }
-        return number % 2 != 0;
+        return number > 0 && number % 2 != 0;
     }
 
     public static int sumOdd(int start, int end) {
