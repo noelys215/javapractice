@@ -1,15 +1,16 @@
 public class Main {
-    public static boolean hasSharedDigit(int num1, int num2) {
-        if ((num1 < 10 || num1 > 99) || (num2 < 10 || num2 > 99)) {
-            return false;
-        }
+    public static boolean hasSameLastDigit(int num1, int num2, int num3) {
+        if (!isValid(num1) || !isValid(num2) || !isValid(num3)) return false;
 
-        int num1LastDigit = num1 % 10;
-        int num1FirstDigit = num1 / 10;
-        int num2LastDigit = num2 % 10;
-        int num2FirstDigit = num2 / 10;
+        int lastDigit1 = num1 % 10;
+        int lastDigit2 = num2 % 10;
+        int lastDigit3 = num3 % 10;
 
-        return (num1FirstDigit == num2FirstDigit || num1FirstDigit == num2LastDigit ||
-                num1LastDigit == num2FirstDigit || num1LastDigit == num2LastDigit);
+        return (lastDigit1 == lastDigit2) || (lastDigit1 == lastDigit3) || (lastDigit2 == lastDigit3);
+
+    }
+
+    public static boolean isValid(int number) {
+        return number >= 10 && number <= 1000;
     }
 }
