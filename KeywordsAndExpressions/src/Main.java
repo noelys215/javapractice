@@ -1,22 +1,15 @@
 public class Main {
-
-    public static int getEvenDigitSum(int number) {
-        if (number < 0) return -1;
-
-
-        int sum = 0;
-        while (number > 0) {
-            int digit = number % 10;
-            if (digit % 2 == 0) {
-                sum += digit;
-            }
-            number /= 10;
+    public static boolean hasSharedDigit(int num1, int num2) {
+        if ((num1 < 10 || num1 > 99) || (num2 < 10 || num2 > 99)) {
+            return false;
         }
 
-        return sum;
-    }
+        int num1LastDigit = num1 % 10;
+        int num1FirstDigit = num1 / 10;
+        int num2LastDigit = num2 % 10;
+        int num2FirstDigit = num2 / 10;
 
-    public static void main(String[] args) {
-        System.out.println(getEvenDigitSum(123456789));
+        return (num1FirstDigit == num2FirstDigit || num1FirstDigit == num2LastDigit ||
+                num1LastDigit == num2FirstDigit || num1LastDigit == num2LastDigit);
     }
 }
