@@ -1,15 +1,14 @@
 public class Main {
-    public static boolean isPalindrome(int number) {
-        int originalNumber = number;
-        int reverse = 0;
 
-        while (number != 0) {
-            int lastDigit = number % 10;
-            reverse = reverse * 10 + lastDigit;
-            number /= 10;
-        }
+    public static int sumFirstAndLastDigit(int number) {
+        if (number < 0) return -1;
 
-        return originalNumber == reverse;
+        int lastDigit = number % 10;
+        int firstDigit = number;
+
+        while (firstDigit >= 10) firstDigit /= 10;
+
+        return firstDigit + lastDigit;
     }
 
 
