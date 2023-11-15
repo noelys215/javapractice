@@ -1,17 +1,14 @@
 public class MainChallenge {
-    public static boolean isLeapYear(int year) {
-        return year >= 1 && year <= 9999 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
-    }
+    public static boolean canPack(int bigCount, int smallCount, int goal) {
+        if (bigCount < 0 || smallCount < 0 || goal < 0) return false;
 
-    public static int getDaysInMonth(int month, int year) {
-        if (month < 1 || month > 12 || year < 1 || year > 9999) {
-            return -1;
-        }
-        return switch (month) {
-            case 2 -> isLeapYear(year) ? 29 : 28;
-            case 4, 6, 9, 11 -> 30;
-            default -> 31;
-        };
+        int totalKilosFromBigBags = bigCount * 5;
+        // Use as many big bags as possible without exceeding the goal
+        int bigBagsUsed = Math.min(goal / 5, bigCount);
+        // Calculate remaining kilos needed after using big bags
+        int remainingKilos = goal - bigBagsUsed * 5;
+        // Check if remaining kilos can be fulfilled with small bags
+        return smallCount >= remainingKilos;
     }
 
 }
