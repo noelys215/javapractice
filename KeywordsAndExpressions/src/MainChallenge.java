@@ -1,14 +1,16 @@
 public class MainChallenge {
-    public static boolean canPack(int bigCount, int smallCount, int goal) {
-        if (bigCount < 0 || smallCount < 0 || goal < 0) return false;
+    public static int getLargestPrime(int number) {
+        if (number <= 1) return -1;
 
-        int totalKilosFromBigBags = bigCount * 5;
-        // Use as many big bags as possible without exceeding the goal
-        int bigBagsUsed = Math.min(goal / 5, bigCount);
-        // Calculate remaining kilos needed after using big bags
-        int remainingKilos = goal - bigBagsUsed * 5;
-        // Check if remaining kilos can be fulfilled with small bags
-        return smallCount >= remainingKilos;
+
+        int largestPrime = -1;
+        for (int i = 2; i <= number; i++) {
+            while (number % i == 0) {
+                largestPrime = i;
+                number /= i;
+            }
+        }
+
+        return largestPrime;
     }
-
 }
