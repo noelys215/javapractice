@@ -1,32 +1,20 @@
-import java.util.Scanner;
-
 public class MainChallenge {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        Double max = null;
-        Double min = null;
-
-        while (true) {
-            System.out.println("Enter a number/char to exit: ");
-            if (scanner.hasNextDouble()) {
-                double validNum = scanner.nextDouble();
-
-                if (min == null || validNum < min) min = validNum;
-                if (max == null || validNum > max) max = validNum;
-
-            } else {
-                break; // Exit loop if the next input is not a double
-            }
-            scanner.nextLine(); // Handle end of line after number input
-        }
-
-        if (min != null && max != null) {
-            System.out.println("min = " + min + ", max = " + max);
-        } else {
-            System.out.println("Invalid Data Entered");
-        }
-
-        scanner.close();
+    public static int getBucketCount(double width, double height, double areaPerBucket, int extraBuckets) {
+        if (width <= 0 || height <= 0 || areaPerBucket <= 0 || extraBuckets < 0) return -1;
+        double area = width * height;
+        double neededBuckets = Math.ceil(area / areaPerBucket);
+        return (int) (neededBuckets - extraBuckets);
     }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket) {
+        if (width <= 0 || height <= 0 || areaPerBucket <= 0) return -1;
+        double area = width * height;
+        return (int) Math.ceil(area / areaPerBucket);
+    }
+
+    public static int getBucketCount(double area, double areaPerBucket) {
+        if (area <= 0 || areaPerBucket <= 0) return -1;
+        return (int) Math.ceil(area / areaPerBucket);
+    }
+
 }
