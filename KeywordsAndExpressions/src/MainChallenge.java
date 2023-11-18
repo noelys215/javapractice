@@ -1,31 +1,32 @@
 import java.util.Scanner;
 
 public class MainChallenge {
-    public static void getLargestPrime(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        double max = 0;
-        double min = 0;
-        int loopCount = 0;
+        Double max = null;
+        Double min = null;
 
         while (true) {
             System.out.println("Enter a number/char to exit: ");
-            String nextEntry = scanner.nextLine();
-            try {
-                double validNum = Double.parseDouble(nextEntry);
-                if (loopCount == 0 || validNum < min) min = validNum;
-                if (loopCount == 0 || validNum > max) max = validNum;
-                loopCount++;
+            if (scanner.hasNextDouble()) {
+                double validNum = scanner.nextDouble();
 
-            } catch (NumberFormatException nfe) {
-                break;
+                if (min == null || validNum < min) min = validNum;
+                if (max == null || validNum > max) max = validNum;
+
+            } else {
+                break; // Exit loop if the next input is not a double
             }
+            scanner.nextLine(); // Handle end of line after number input
         }
-        if (loopCount > 0) {
-            System.out.println("min = " + min + ", max =" + max);
+
+        if (min != null && max != null) {
+            System.out.println("min = " + min + ", max = " + max);
         } else {
             System.out.println("Invalid Data Entered");
         }
 
+        scanner.close();
     }
 }
