@@ -1,7 +1,21 @@
 public class Customer {
     private String name;
-    private Double creditLimit;
+    private double creditLimit;
     private String email;
+
+    public Customer() {
+        this("Nobody", "nobody@nerv.net");
+    }
+
+    public Customer(String name, String email) {
+        this(name, 1000., email);
+    }
+
+    public Customer(String name, Double creditLimit, String email) {
+        this.name = name;
+        this.creditLimit = creditLimit;
+        this.email = email;
+    }
 
     public String getName() {
         return name;
