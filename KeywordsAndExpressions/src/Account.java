@@ -5,6 +5,28 @@ public class Account {
     private String customerEmail;
     private String customerPhone;
 
+    public Account() {
+        this("56789", 2.50, "Default Name", "Default Email", "Default Phone");
+        System.out.println("Empty Constructor Called");
+    }
+
+    public Account(String number, double balance, String customerName, String email, String phone) {
+        System.out.println("Account Constructor w/Params Called");
+        this.number = number;
+        this.balance = balance;
+        this.customerName = customerName;
+        customerEmail = email;
+        customerPhone = phone;
+    }
+
+
+    public Account(String customerName, String customerEmail, String customerPhone) {
+        this("99999", 100.55, customerName, customerEmail, customerPhone);
+        /* this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone; */
+    }
+
     public void depositFunds(double depositAmount) {
         balance += depositAmount;
         System.out.println("Deposit of $" + depositAmount + " made. New balance is $" + balance);
