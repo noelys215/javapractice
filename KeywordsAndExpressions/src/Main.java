@@ -1,25 +1,38 @@
-public class Main {
+public class Main extends Object {
     public static void main(String[] args) {
-        for (int i = 1; i <= 5; i++) {
-            LPAStudent s = new LPAStudent("S92300" + i,
-                    switch (i) {
-                        case 1 -> "Rei";
-                        case 2 -> "Asuka";
-                        case 3 -> "Mari";
-                        case 4 -> "Shinji";
-                        case 5 -> "Kaworu";
-                        default -> "Anon";
-                    },
-                    "03/30/2001",
-                    "Eva Piloting");
+        Student asuka = new Student("Asuka", 19);
+        System.out.println(asuka.toString());
 
-            System.out.println(s);
-        }
+        PrimarySchoolStudent shinji = new PrimarySchoolStudent("Shinji", 8, "Yui");
+        System.out.println(shinji);
+    }
+}
 
-        Student pojoStudent = new Student("S923006", "Misato", "05/08/1986", "Java Masterclass");
-        LPAStudent recordStudent = new LPAStudent("S923007", "Ritsuko", "11/21/1985", "Java Masterclass");
+class Student {
+    private String name;
+    private int age;
 
-        System.out.println(pojoStudent);
-        System.out.println(recordStudent);
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return name + ", is " + 8 + ".";
+    }
+}
+
+class PrimarySchoolStudent extends Student {
+    private String parentName;
+
+    PrimarySchoolStudent(String name, int age, String parentName) {
+        super(name, age);
+        this.parentName = parentName;
+    }
+
+    @Override
+    public String toString() {
+        return parentName + "'s child, " + super.toString();
     }
 }
