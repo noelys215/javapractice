@@ -1,38 +1,22 @@
-public class Main extends Object {
+public class Main {
     public static void main(String[] args) {
-        Student asuka = new Student("Asuka", 19);
-        System.out.println(asuka.toString());
+        Employee asuka = new Employee("Asuka", "12/05/2005", "01/02/2021");
+        System.out.println(asuka);
+        System.out.println("Age: " + asuka.getAge());
+        System.out.println("Pay: " + asuka.collectPay());
 
-        PrimarySchoolStudent shinji = new PrimarySchoolStudent("Shinji", 8, "Yui");
-        System.out.println(shinji);
-    }
-}
+        SalariedEmployee rei = new SalariedEmployee("Rei", "11/15/2004", "01/02/2020", 45000);
+        System.out.println(rei);
+        System.out.println("Rei's Pay: $" + rei.collectPay());
 
-class Student {
-    private String name;
-    private int age;
+        rei.retire();
+        System.out.println("Rei's Pension: $" + rei.collectPay());
 
-    public Student(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return name + ", is " + 8 + ".";
-    }
-}
-
-class PrimarySchoolStudent extends Student {
-    private String parentName;
-
-    PrimarySchoolStudent(String name, int age, String parentName) {
-        super(name, age);
-        this.parentName = parentName;
+        HourlyEmployee mari = new HourlyEmployee("Mari", "04/06/2000", "01/02/2010", 45);
+        System.out.println(mari);
+        System.out.println("Mari's Pay: $" + mari.collectPay());
+        System.out.println("Mari's Holiday Pay: $" + mari.getDoublePay());
     }
 
-    @Override
-    public String toString() {
-        return parentName + "'s child, " + super.toString();
-    }
+
 }
