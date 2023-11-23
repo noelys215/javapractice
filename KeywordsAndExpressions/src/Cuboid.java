@@ -1,8 +1,8 @@
-public class Cylinder extends Circle {
+public class Cuboid extends Rectangle {
     private double height;
 
-    public Cylinder(double radius, double height) {
-        super(radius);
+    public Cuboid(double width, double length, double height) {
+        super(width, length);
         this.height = height < 0 ? 0 : height;
     }
 
