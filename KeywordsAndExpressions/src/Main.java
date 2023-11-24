@@ -1,14 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-        ComputerCase theCase = new ComputerCase("2208", "Dell", "240");
-        Monitor theMonitor = new Monitor("27in Beast", "Acer", 27, "2540x1440");
-        Motherboard theMotherboard = new Motherboard("BJ-200", "Asus", 4, 6, "v2.44");
-        PersonalComputer thePC = new PersonalComputer("2208", "Dell", theCase, theMonitor, theMotherboard);
-/*
-        thePC.getMonitor().drawPixelAt(10, 10, "red");
-        thePC.getMotherboard().loadProgram("Windows OS");
-        thePC.getComputerCase().pressPower();
- */
-        thePC.powerUp();
+        /*
+        Player player = new Player();
+        player.fullName = "Asuka Langley";
+        player.health = 20;
+        player.weapon = "Rail Gun";
+
+        int damage = 10;
+        player.loseHealth(damage);
+        System.out.println("Remaining Health: " + player.healthRemaining());
+        player.health = 200;
+        player.loseHealth(11);
+        System.out.println("Remaining Health: " + player.healthRemaining());
+        */
+
+        EnhancedPlayer mari = new EnhancedPlayer("Mari", 200, "Katana");
+        System.out.println("Initial Health: " + mari.healthRemaining());
+
     }
 }

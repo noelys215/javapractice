@@ -1,18 +1,12 @@
 public class MainChallenge {
     public static void main(String[] args) {
-        SmartKitchen kitchen = new SmartKitchen();
+        Printer printer = new Printer(50, true);
+        System.out.println("Initial Page Count: " + printer.getPagesPrinted());
 
-        kitchen.setKitchenState(true, true, true);
-        kitchen.doKitchenWork();
+        int pagesPrinted = printer.printPages(5);
+        System.out.printf("Current Job Pages: %d Printed Total: %d %n", pagesPrinted, printer.getPagesPrinted());
 
-        /*
-        kitchen.getDishWasher().setHasWorkToDo(true);
-        kitchen.getIceBox().setHasWorkToDo(true);
-        kitchen.getBrewMaster().setHasWorkToDo(true);
-
-        kitchen.getDishWasher().doDishes();
-        kitchen.getIceBox().orderFood();
-        kitchen.getBrewMaster().brewCoffee();
-        */
+        pagesPrinted = printer.printPages(10);
+        System.out.printf("Current Job Pages: %d Printed Total: %d %n", pagesPrinted, printer.getPagesPrinted());
     }
 }
