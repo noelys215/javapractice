@@ -15,6 +15,7 @@ public class Movie {
             case 'A' -> new Adventure(title);
             case 'C' -> new Comedy(title);
             case 'S' -> new SciFi(title);
+            case 'H' -> new Horror(title);
             default -> new Movie(title);
         };
     }
@@ -30,6 +31,10 @@ class Adventure extends Movie {
         super.watchMovie();
         System.out.printf(".. %s%n".repeat(3), "Pleasant Scene", "Scary Music", "Something Bad Happens");
     }
+
+    public void watchAdventure() {
+        System.out.println("Watching an adventure!");
+    }
 }
 
 class Comedy extends Movie {
@@ -42,6 +47,10 @@ class Comedy extends Movie {
         super.watchMovie();
         System.out.printf(".. %s%n".repeat(3), "Something Funny Occurs", "Something Funnier Occurs", "Happy Ending");
     }
+
+    public void watchComedy() {
+        System.out.println("Watching a comedy!");
+    }
 }
 
 class SciFi extends Movie {
@@ -53,5 +62,25 @@ class SciFi extends Movie {
     public void watchMovie() {
         super.watchMovie();
         System.out.printf(".. %s%n".repeat(3), "Aliens Land", "NASA Hunts Aliens", "Weird Ending");
+    }
+
+    public void watchSciFi() {
+        System.out.println("Watching a SciFi thriller!");
+    }
+}
+
+class Horror extends Movie {
+    public Horror(String title) {
+        super(title);
+    }
+
+    @Override
+    public void watchMovie() {
+        super.watchMovie();
+        System.out.printf(".. %s%n".repeat(3), "Creepy Music", "Evil Cult", "Teens get captured");
+    }
+
+    public void watchHorror() {
+        System.out.println("Watching a Horror!");
     }
 }
