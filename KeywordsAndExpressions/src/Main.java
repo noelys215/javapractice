@@ -1,21 +1,16 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        /*
-        Player player = new Player();
-        player.fullName = "Asuka Langley";
-        player.health = 20;
-        player.weapon = "Rail Gun";
-
-        int damage = 10;
-        player.loseHealth(damage);
-        System.out.println("Remaining Health: " + player.healthRemaining());
-        player.health = 200;
-        player.loseHealth(11);
-        System.out.println("Remaining Health: " + player.healthRemaining());
-        */
-
-        EnhancedPlayer mari = new EnhancedPlayer("Mari", 200, "Katana");
-        System.out.println("Initial Health: " + mari.healthRemaining());
-
+        Scanner s = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter Type or Q to Quit ");
+            String type = s.nextLine();
+            if ("Qq".contains(type)) break;
+            System.out.print("Enter Movie Title ");
+            String title = s.nextLine();
+            Movie movie = Movie.getMovie(type, title);
+            movie.watchMovie();
+        }
     }
 }
