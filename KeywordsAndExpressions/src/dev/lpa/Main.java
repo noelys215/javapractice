@@ -1,28 +1,36 @@
 package dev.lpa;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
-        int[] newArray = new int[5];
-        for (int i = 0; i < newArray.length; i++) newArray[i] = newArray.length - i;
-        for (int i = 0; i < newArray.length; i++) System.out.print(newArray[i] + " ");
-        for (int element : newArray) System.out.print(element + " ");
+        /*
+        int[] firstArray = getRandomArray(10);
+        System.out.println(Arrays.toString(firstArray));
+        Arrays.sort(firstArray);
+        System.out.println(Arrays.toString(firstArray));
+        */
+        int[] secondArray = getRandomArray(10);
+        System.out.println(Arrays.toString(secondArray));
+        Arrays.fill(secondArray, 5);
+        System.out.println(Arrays.toString(secondArray));
         System.out.println(" ");
-        System.out.println(Arrays.toString(newArray));
-        System.out.println(" ");
-        Object objectVar = newArray;
 
-        if (objectVar instanceof int[]) System.out.println("objectVar is an int array");
+        int[] thirdArray = getRandomArray(10);
+        System.out.println(Arrays.toString(thirdArray));
 
-        Object[] objectArray = new Object[3];
-        objectArray[0] = "Hello";
-        objectArray[1] = new StringBuilder("World");
-        objectArray[2] = newArray;
-
+        int[] fourthArray = Arrays.copyOf(thirdArray, thirdArray.length);
+        System.out.println(Arrays.toString(fourthArray));
 
     }
 
+    private static int[] getRandomArray(int len) {
+        Random random = new Random();
+        int[] newInt = new int[len];
 
+        for (int i = 0; i < len; i++) newInt[i] = random.nextInt(100);
+        return newInt;
+    }
 }
