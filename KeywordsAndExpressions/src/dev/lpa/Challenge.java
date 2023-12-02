@@ -1,34 +1,24 @@
 package dev.lpa;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Challenge {
     public static void main(String[] args) {
-        int[] returnArray = readIntegers();
-        System.out.println(Arrays.toString(returnArray));
-
-        int returnedMin = findMin(returnArray);
-        System.out.println("MIN: " + returnedMin);
+        int[] array = {1, 2, 3, 4, 5};
+        System.out.println("Array before reverse: " + Arrays.toString(array));
+        reverse(array);
+        System.out.println("Array after reverse: " + Arrays.toString(array));
     }
 
-    private static int[] readIntegers() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Integers:");
-        String input = scanner.nextLine();
-
-        String[] splits = input.split(",");
-        int[] values = new int[splits.length];
-        for (int i = 0; i < splits.length; i++) {
-            values[i] = Integer.parseInt(splits[i].trim());
+    private static void reverse(int[] array) {
+        int maxIndex = array.length - 1;
+        int midpoint = array.length / 2;
+        for (int i = 0; i < midpoint; i++) {
+            int temp = array[i];
+            array[i] = array[maxIndex - i];
+            array[maxIndex - i] = temp;
         }
-        return values;
     }
 
-    private static int findMin(int[] array) {
-        int min = Integer.MAX_VALUE;
-        for (int el : array) if (el < min) min = el;
-        return min;
-    }
 
 }
