@@ -1,28 +1,39 @@
 package dev.lpa;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+record GroceryItem(String name, String type, int count) {
+    public GroceryItem(String name) {
+        this(name, "DAIRY", 1);
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("%d %s in %s", count, name.toUpperCase(), type);
+    }
+}
 
 public class Main {
     public static void main(String... args) {
+        GroceryItem[] groceryArray = new GroceryItem[3];
+        groceryArray[0] = new GroceryItem("milk");
+        groceryArray[1] = new GroceryItem("apples", "PRODUCE", 6);
+        groceryArray[2] = new GroceryItem("oranges", "PRODUCE", 5);
 
-        int[][] array2 = new int[4][4];
-        System.out.println(Arrays.toString(array2));
-        System.out.println("array2s length: " + array2.length);
+        System.out.println(Arrays.toString(groceryArray));
 
-        for (int[] outer : array2) System.out.println(Arrays.toString(outer));
-/*
-        for (int i = 0; i < array2.length; i++) {
-            var innerArray = array2[i];
-            for (int j = 0; j < innerArray.length; j++) System.out.print(array2[i][j] + " ");
-            System.out.println();
-        }
+        ArrayList objectList = new ArrayList();
+        objectList.add(new GroceryItem("Butter"));
+        objectList.add("Yogurt");
 
- */
-        for (var outer : array2) {
-            for (var element : outer) System.out.print(element + " ");
-            System.out.println();
-        }
-
-        System.out.println(Arrays.deepToString(array2));
+        ArrayList<GroceryItem> groceryList = new ArrayList<>();
+        groceryList.add(new GroceryItem("Butter"));
+        groceryList.add(new GroceryItem("Milk"));
+        groceryList.add(new GroceryItem("kale", "PRODUCE", 5));
+        groceryList.add(0, new GroceryItem("apples", "PRODUCE", 6));
+        System.out.println(groceryList);
     }
+
 }
