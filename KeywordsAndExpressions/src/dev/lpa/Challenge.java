@@ -1,57 +1,60 @@
 package dev.lpa;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Challenge {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        boolean flag = true;
         ArrayList<String> groceries = new ArrayList<>();
 
-        while (flag) {
+        while (true) {
             printActions();
-            switch (Integer.parseInt(scanner.nextLine())) {
+            int action = Integer.parseInt(scanner.nextLine());
+            if (action == 0) break;
+
+            switch (action) {
                 case 1 -> addItems(groceries);
                 case 2 -> removeItems(groceries);
-                default -> flag = false;
             }
-            groceries.sort(Comparator.naturalOrder());
-            System.out.println(groceries);
+
+            groceries.sort(String::compareTo);
+            System.out.println("Current Grocery List: " + groceries);
         }
     }
 
     private static void addItems(ArrayList<String> groceries) {
-        System.out.println("Add item(s):");
-        String[] items = scanner.nextLine().split(",");
-        for (String i : items) {
-            String trimmed = i.trim();
-            if (!groceries.contains(trimmed)) groceries.add(trimmed);
+        System.out.println("Enter items to add (comma-separated):");
+        ArrayList<String> itemsToAdd = parseInput();
+        for (String item : itemsToAdd) {
+            if (!groceries.contains(item)) {
+                groceries.add(item);
+            }
         }
     }
 
     private static void removeItems(ArrayList<String> groceries) {
-        System.out.println("Remove item(s):");
+        System.out.println("Enter items to remove (comma-separated):");
+        ArrayList<String> itemsToRemove = parseInput();
+        groceries.removeAll(itemsToRemove);
+    }
+
+    private static ArrayList<String> parseInput() {
         String[] items = scanner.nextLine().split(",");
-        for (String i : items) {
-            String trimmed = i.trim();
-            groceries.remove(trimmed);
+        ArrayList<String> itemList = new ArrayList<>();
+        for (String item : items) {
+            itemList.add(item.trim());
         }
+        return itemList;
     }
 
     private static void printActions() {
-        String textBlock = """
+        System.out.println("""
                 Available actions:
-                                
                 0 - to shutdown
-                                
-                1 - to add item(s) to list (comma delimited list)
-                                
-                2 - to remove any items (comma delimited list)
-                                
-                Enter a number for which action you want to do:""";
-        System.out.print(textBlock + " ");
+                1 - to add items to the list
+                2 - to remove items from the list
+                Choose an action:""");
     }
 }
