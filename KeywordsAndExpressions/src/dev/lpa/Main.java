@@ -5,20 +5,22 @@ import java.util.ListIterator;
 
 public class Main {
     public static void main(String... args) {
-//        LinkedList<String> placesToVisit = new LinkedList<>();
+        // LinkedList<String> placesToVisit = new LinkedList<>();
         var placesToVisit = new LinkedList<String>();
         placesToVisit.add("Sao Paulo");
         placesToVisit.add(0, "Rio");
-        System.out.println(placesToVisit);
-
-        addMoreElements(placesToVisit);
 //        System.out.println(placesToVisit);
-
+        addMoreElements(placesToVisit);
+        // System.out.println(placesToVisit);
+    /*
         gettingElements(placesToVisit);
         printItinerary(placesToVisit);
         printItinerary2(placesToVisit);
         printItinerary3(placesToVisit);
         printItinerary4(placesToVisit);
+    */
+
+        testIterator(placesToVisit);
     }
 
     private static void addMoreElements(LinkedList<String> list) {
@@ -124,5 +126,14 @@ public class Main {
         System.out.println(" ");
     }
 
-
+    private static void testIterator(LinkedList<String> list) {
+        var iterator = list.iterator();
+        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+            if (iterator.next().equals("Rio")) {
+                iterator.remove();
+            }
+        }
+        System.out.println(list);
+    }
 }
