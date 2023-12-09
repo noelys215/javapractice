@@ -1,71 +1,82 @@
 package dev.lpa;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Optional;
 
-record Place(String name, int distance) {
+record Customer(String name, ArrayList<Double> transactions) {
+    public Customer(String name, double initialDeposit) {
+        this(name.toUpperCase(), new ArrayList<Double>());
+        transactions.add(initialDeposit);
+    }
+}
+
+class Bank {
+    private String name;
+    private ArrayList<Customer> customers = new ArrayList<>();
+
+    public Bank(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s (%d)", name, distance);
+        return "Bank{" +
+                "name='" + name + '\'' +
+                ", customers=" + customers +
+                '}';
+    }
+
+    private Optional<Customer> getCustomer(String customerName) {
+        return customers.stream()
+                .filter(customer -> customer.name().equalsIgnoreCase(customerName))
+                .findFirst();
+    }
+
+    public void addNewCustomer(String customerName, double initialDeposit) {
+        if (getCustomer(customerName).isEmpty()) {
+            Customer customer = new Customer(customerName, initialDeposit);
+            customers.add(customer);
+            System.out.println("New customer added: " + customer);
+        } else {
+            System.out.printf("Customer (%s) already exists%n", customerName);
+        }
+    }
+
+    public void addTransaction(String name, double transactionAmount) {
+        getCustomer(name).ifPresent(customer -> customer.transactions().add(transactionAmount));
+    }
+
+    public void printStatement(String customerName) {
+        Optional<Customer> customer = getCustomer(customerName);
+        if (customer.isPresent()) {
+            System.out.println("_".repeat(30));
+            System.out.println("Customer Name: " + customer.get().name());
+            System.out.println("Transactions:");
+            for (double d : customer.get().transactions()) {
+                System.out.printf("$%10.2f (%s)%n", d, d < 0 ? "debit" : "credit");
+            }
+        } else {
+            System.out.printf("Customer (%s) not found %n", customerName);
+        }
     }
 }
 
 public class Main {
     public static void main(String... args) {
-        LinkedList<Place> placesToVisit = new LinkedList<>();
-        addPlace(placesToVisit, new Place("Adelaide", 1374));
-        addPlace(placesToVisit, new Place("Brisbane", 917));
-        addPlace(placesToVisit, new Place("Perth", 3923));
-        addPlace(placesToVisit, new Place("Alice Springs", 2771));
-        addPlace(placesToVisit, new Place("Darwin", 3972));
-        addPlace(placesToVisit, new Place("Melbourne", 877));
-        placesToVisit.addFirst(new Place("Sydney", 0));
+        Customer bob = new Customer("Bob S", 1000.0);
+        System.out.println(bob);
 
-        var iterator = placesToVisit.listIterator();
-        Scanner scanner = new Scanner(System.in);
-        boolean forward = true;
+        Bank bank = new Bank("Chase");
+        bank.addNewCustomer("Asuka", 500.0);
+        System.out.println(bank);
 
-        printMenu();
-        String menuItem;
-        while (!(menuItem = scanner.nextLine().toUpperCase()).equals("Q")) {
-            switch (menuItem) {
-                case "F":
-                    if (!forward && iterator.hasNext()) iterator.next();
-                    forward = true;
-                    System.out.println(iterator.hasNext() ? iterator.next() : "Final destination reached");
-                    break;
-                case "B":
-                    if (forward && iterator.hasPrevious()) iterator.previous();
-                    forward = false;
-                    System.out.println(iterator.hasPrevious() ? iterator.previous() : "At the starting point");
-                    break;
-                case "M":
-                    printMenu();
-                    break;
-                case "L":
-                    System.out.println(placesToVisit);
-                    break;
-            }
-        }
-    }
+        bank.addTransaction("Asuka", -10.24);
+        bank.addTransaction("Asuka", -75.01);
+        bank.printStatement("Asuka");
 
-    private static void addPlace(LinkedList<Place> list, Place place) {
-        if (list.stream().noneMatch(p -> p.name().equalsIgnoreCase(place.name()))) {
-            list.add(place);
-            list.sort(Comparator.comparingInt(Place::distance));
-        } else {
-            System.out.println("Dupe Found: " + place);
-        }
-    }
-
-    private static void printMenu() {
-        System.out.println("""
-                Available actions (select word or letter):
-                (F)orward
-                (B)ackwards
-                (L)ist Places
-                (M)enu
-                (Q)uit""");
+        bank.addNewCustomer("Mari", 25);
+        bank.addTransaction("Mari", 1024);
+        bank.printStatement("Mari");
     }
 }
+
