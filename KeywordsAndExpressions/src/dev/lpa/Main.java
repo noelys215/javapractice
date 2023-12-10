@@ -1,33 +1,29 @@
 package dev.lpa;
 
-import java.util.Random;
+
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String... args) {
-        DayOfTheWeek weekDay = DayOfTheWeek.TUES;
-        System.out.println(weekDay);
+    public static void main(String[] args) {
 
-        for (int i = 0; i < 10; i++) {
-            weekDay = getRandomDay();
-            switchDayOfWeek(weekDay);
+        Scanner scanner = new Scanner(System.in);
+        int rows;
+        int columns;
+        String symbol = "";
+
+        System.out.println("Enter # of rows: ");
+        rows = scanner.nextInt();
+        System.out.println("Enter # of columns: ");
+        columns = scanner.nextInt();
+        System.out.println("Enter Symbol");
+        symbol = scanner.next();
+
+        for (int i = 1; i <= rows; i++) {
+            System.out.println();
+            for (int j = 1; j <= columns; j++) {
+                System.out.print(symbol);
+            }
         }
-    }
-
-    public static void switchDayOfWeek(DayOfTheWeek weekday) {
-        int weekDayInt = weekday.ordinal() + 1;
-        switch (weekday) {
-            case WED -> System.out.println("Wednesday is Day: " + weekDayInt);
-            case SAT -> System.out.println("Saturday is Day: " + weekDayInt);
-            default -> System.out.println(weekday.name().charAt(0) +
-                    weekday.name().substring(1).toLowerCase() +
-                    "day is Day: " + weekDayInt);
-        }
-    }
-
-    public static DayOfTheWeek getRandomDay() {
-        int randomInt = new Random().nextInt(7);
-        var allDays = DayOfTheWeek.values();
-        return allDays[randomInt];
     }
 }
 
