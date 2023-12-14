@@ -1,48 +1,20 @@
 package dev.lpa;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Bird bird = new Bird();
-        Animal animal = bird;
-        FlightEnabled flier = bird;
-        Trackable tracked = bird;
-        Trackable truck = new Truck();
+
+        List<Mappable> mappables = new ArrayList<>();
+        mappables.add(new Building("Sydney Town Hall", UsageType.GOVERNMENT));
+        mappables.add(new Building("Sydney Opera House", UsageType.ENTERTAINMENT));
+        mappables.add(new Building("Stadium Australia", UsageType.SPORTS));
+
+        mappables.add(new UtilityLine("College St", UtilityType.FIBER_OPTIC));
+        mappables.add(new UtilityLine("Olympic Blvd", UtilityType.WATER));
+        for (var m : mappables) Mappable.mapIt(m);
 
 
-        LinkedList<FlightEnabled> fliers = new LinkedList<>();
-        fliers.add(bird);
-        List<FlightEnabled> betterFliers = new LinkedList<>();
-        betterFliers.add(bird);
-
-        System.out.println(" ");
-        triggerFliers(fliers);
-        flyFliers(fliers);
-        landFliers(fliers);
-        System.out.println(" ");
-        triggerFliers(betterFliers);
-        flyFliers(betterFliers);
-        landFliers(betterFliers);
-    }
-
-    private static void inFlight(FlightEnabled flier) {
-        flier.takeOff();
-        flier.fly();
-        if (flier instanceof Trackable tracked) tracked.track();
-        flier.land();
-    }
-
-    private static void triggerFliers(List<FlightEnabled> fliers) {
-        for (var flier : fliers) flier.takeOff();
-    }
-
-    private static void flyFliers(List<FlightEnabled> fliers) {
-        for (var flier : fliers) flier.fly();
-    }
-
-    private static void landFliers(List<FlightEnabled> fliers) {
-        for (var flier : fliers) flier.land();
     }
 }
