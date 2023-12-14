@@ -12,5 +12,12 @@ public class Test {
         flier.fly();
         if (flier instanceof Trackable tracked) tracked.track();
         flier.land();
+        orbit(new Satellite());
+    }
+
+    private static void orbit(OrbitEarth flier) {
+        flier.takeOff();
+        flier.fly();
+        flier.land();
     }
 }

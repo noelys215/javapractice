@@ -33,29 +33,56 @@ record DragonFly(String name, String type) implements FlightEnabled {
 }
 
 class Satellite implements OrbitEarth {
+    FlightStages stage = FlightStages.GROUNDED;
+
+
     public void achievedOrbit() {
-        System.out.println("Orbit Achieved");
+        transition("Orbit Achieved");
     }
 
     @Override
     public void takeOff() {
-
+        transition("Taking Off");
     }
 
     @Override
     public void land() {
-
+        transition("Landing");
     }
 
     @Override
     public void fly() {
+        achievedOrbit();
+        transition("Orbiting");
+    }
 
+    public void transition(String desc) {
+        System.out.println(desc);
+        stage = transition(stage);
+        stage.track();
     }
 }
 
 
 interface OrbitEarth extends FlightEnabled {
     void achievedOrbit();
+
+    private static void log(String desc) {
+        var today = new java.util.Date();
+        System.out.println(today + ": " + desc);
+    }
+
+    private void logStage(FlightStages stage, String desc) {
+        desc = stage + ": " + desc;
+        log(desc);
+    }
+
+    @Override
+    default FlightStages transition(FlightStages stage) {
+        FlightStages nextStage = FlightEnabled.super.transition(stage);
+        logStage(stage, "Start Transition to " + nextStage);
+        return nextStage;
+    }
 }
 
 interface FlightEnabled {
