@@ -82,7 +82,18 @@ public class LinkedList {
     }
 
     public Node removeFirst() {
-
+        /* Check for an Empty List */
+        if (length == 0) return null;
+        /* Store Head Node in temp var */
+        Node temp = head;
+        /* Update the Head of the List */
+        head = head.next;
+        /* Detach the Removed Node */
+        temp.next = null;
+        /* Decrement the Length */
+        length--;
+        /* Return the Removed Node */
+        return temp;
     }
 
     public void prepend(int value) {
