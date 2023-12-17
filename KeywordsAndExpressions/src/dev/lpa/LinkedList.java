@@ -92,6 +92,8 @@ public class LinkedList {
         temp.next = null;
         /* Decrement the Length */
         length--;
+        /* Check if List is empty and update */
+        if (length == 0) tail = null;
         /* Return the Removed Node */
         return temp;
     }

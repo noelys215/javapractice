@@ -1,17 +1,30 @@
 package dev.lpa;
 
+record BaseballPlayer(String name, String position) {
+}
+
 public class Main {
     public static void main(String[] args) {
-        LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.append(2);
+        BaseballTeam phillies = new BaseballTeam("Philadelphia Phillies");
+        BaseballTeam yankees = new BaseballTeam("New York Yankees");
+        scoreResult(phillies, 3, yankees, 5);
 
-        /* (2) Items - Returns 2 Nodes */
-        System.out.println(myLinkedList.removeLast().value);
-        /* (1) Item - Returns 1 Nodes */
-        System.out.println(myLinkedList.removeLast().value);
-        /* (0) Items - Returns 1 Null */
-        System.out.println(myLinkedList.removeLast());
+        var harper = new BaseballPlayer("B Harper", "Right Fielder");
+        var marsh = new BaseballPlayer("B Marsh", "Right Fielder");
+
+        phillies.addTeamMember(harper);
+        phillies.addTeamMember(marsh);
+        phillies.listTeamMembers();
+
+
     }
 
+    public static void scoreResult(BaseballTeam team1, int t1_score,
+                                   BaseballTeam team2, int t2_score) {
+        String message = team1.setScore(t1_score, t2_score);
+        team2.setScore(t2_score, t1_score);
+        System.out.printf("%s %s %s %n", team1, message, team2);
+
+    }
 
 }
