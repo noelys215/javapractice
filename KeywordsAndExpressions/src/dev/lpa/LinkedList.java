@@ -66,6 +66,32 @@ public class LinkedList {
         return false;
     }
 
+    public boolean insert(int index, int value) {
+        /* Check for Valid Index */
+        if (index < 0 || index > length) return false;
+        /* Handle Insertion at the Start of the List */
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+        /* Handle Insertion at the End of the List */
+        if (index == length) {
+            append(value);
+            return true;
+        }
+        /* Create a new node */
+        Node newNode = new Node(value);
+        /* Find the Node Before the Insertion Point */
+        Node temp = get(index - 1);
+        /* Insert the New Node */
+        newNode.next = temp.next;
+        temp.next = newNode;
+        /* Increment Length */
+        length++;
+        /* Return True */
+        return true;
+    }
+
     public void append(int value) {
         Node newNode = new Node(value);
         /* if LinkedList is empty */
@@ -123,11 +149,6 @@ public class LinkedList {
     }
 
     public void prepend(int value) {
-    }
-
-
-    public boolean insert(int index, int value) {
-        return false;
     }
 
 
