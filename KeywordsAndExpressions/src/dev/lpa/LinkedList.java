@@ -53,6 +53,19 @@ public class LinkedList {
         return temp;
     }
 
+    public boolean set(int index, int value) {
+        /* Retrieve the Node at the Specified Index */
+        Node temp = get(index);
+        /* Check If the Node Exists */
+        if (temp != null) {
+            /* Set the New Value and Return true */
+            temp.value = value;
+            return true;
+        }
+        /* Return false if Node Doesn't Exist */
+        return false;
+    }
+
     public void append(int value) {
         Node newNode = new Node(value);
         /* if LinkedList is empty */
