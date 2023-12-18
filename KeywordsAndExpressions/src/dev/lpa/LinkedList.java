@@ -42,6 +42,17 @@ public class LinkedList {
         System.out.println("Length: " + length);
     }
 
+    public Node get(int index) {
+        /* Check if Index is Valid */
+        if (index < 0 || index >= length) return null;
+        /* Initialize Temporary Node to Head of the List */
+        Node temp = head;
+        /* Moves Temp up the list to the Specified Index */
+        for (int i = 0; i < index; i++) temp = temp.next;
+        /* Return the Node at the Specified Index: */
+        return temp;
+    }
+
     public void append(int value) {
         Node newNode = new Node(value);
         /* if LinkedList is empty */
