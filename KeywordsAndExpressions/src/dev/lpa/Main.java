@@ -1,28 +1,49 @@
 package dev.lpa;
 
+import dev.lpa.model.LPAStudent;
+import dev.lpa.model.Student;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        var nationalUSParks = new Park[]{
-                new Park("Yellowstone", "44.4882, -110.5916"),
-                new Park("Grand Canyon", "36.1085, -112.0965"),
-                new Park("Yosemite", "37.8855, -119.5360")
-        };
-        Layer<Park> parkLayer = new Layer<>(nationalUSParks);
-        parkLayer.renderLayer();
+        int studentCount = 10;
 
-        var majorUSRivers = new River[]{
-                new River("Delaware",
-                        "47.2160,-95.2348", "29.1566, -89.2495", "35.1556, -90.0659"),
-                new River("Schuylkill",
-                        "45.9239,-111.2348", "38.1566, -90.2495"),
-        };
+        List<Student> students = new ArrayList<>();
+        for (int i = 0; i < studentCount; i++) {
+            students.add(new Student());
+        }
+        students.add(new LPAStudent());
+        printMoreLists(students);
 
-        Layer<River> riverLayer = new Layer<>(majorUSRivers);
-        riverLayer.addElements(new River("Colorado", "25.9239,-11.2348, -68.1566, -154.2495"));
-        riverLayer.addElements(new River("Missouri", "15.9239,-71.2348, -98.1566, 54.2495"));
-        System.out.println();
-        riverLayer.renderLayer();
+        List<LPAStudent> lpaStudents = new ArrayList<>();
+        for (int i = 0; i < studentCount; i++) {
+            lpaStudents.add(new LPAStudent());
+        }
+        printMoreLists(lpaStudents);
+
+        testList(new ArrayList<String>(List.of("Able", "Kaine", "Charlie")));
+        testList(new ArrayList<Integer>(List.of(1, 2, 3)));
+
     }
 
+    public static void testList(List<?> list) {
+        for (var el : list) {
+            if (el instanceof String s) {
+                System.out.println("String: " + s.toUpperCase());
+            } else if (el instanceof Integer i) {
+                System.out.println("Integer: " + i.floatValue());
+            }
+        }
+    }
+
+
+    public static void printMoreLists(List<? extends Student> students) {
+
+
+        for (var student : students) System.out.println(student);
+        System.out.println();
+
+    }
 }

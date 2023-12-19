@@ -149,6 +149,7 @@ public class LinkedList {
     }
 
     public void prepend(int value) {
+        System.out.println();
     }
 
 
