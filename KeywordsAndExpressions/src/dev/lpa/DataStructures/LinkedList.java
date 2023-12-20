@@ -1,4 +1,10 @@
-package dev.lpa;
+package dev.lpa.DataStructures;
+
+/* Big O
+ * Removing the last item from a LinkedList is:  O(n)
+ * Removing the first item from a Linked List is:  O(1)
+ * Finding an item by index in a Linked List is: O(n)
+ * */
 
 public class LinkedList {
     private Node head;
@@ -44,7 +50,7 @@ public class LinkedList {
 
     public Node get(int index) {
         /* Check if Index is Valid */
-        if (index < 0 || index >= length) return null;
+
         /* Initialize Temporary Node to Head of the List */
         Node temp = head;
         /* Moves Temp up the list to the Specified Index */
@@ -146,6 +152,44 @@ public class LinkedList {
         if (length == 0) tail = null;
         /* Return the Removed Node */
         return temp;
+    }
+
+    public Node remove(int index) {
+        /* Check for Valid Index */
+        if (index < 0 || index >= length) return null;
+        /* Remove the First Node */
+        if (index == 0) return removeFirst();
+        /* Remove the Last Node */
+        if (index == length - 1) return removeLast();
+        /* Find the Node Before the One to be Removed */
+        Node prev = get(index - 1);
+        /* Remove the Desired Node: */
+        Node temp = prev.next;
+        prev.next = temp.next;
+        /* Detach the Removed Node */
+        temp.next = null;
+        /* Decrement the List Length */
+        length--;
+        /* Return the Removed Node */
+        return temp;
+    }
+
+    public void reverse() {
+        /* Initialize Pointers */
+        Node temp = head;
+        /* Swap Head and Tail */
+        head = tail;
+        tail = temp;
+        /* Initialize More Pointers for Reversal */
+        Node after = temp.next;
+        Node before = null;
+        /* Iterate Through the List */
+        for (int i = 0; i < length; i++) {
+            after = temp.next; // Store the next node in 'after'
+            temp.next = before; // Reverse the 'next' pointer of the current node to point to 'before'
+            before = temp; // Move 'before' forward (it now points to the current node)
+            temp = after; // Move 'temp' forward (it now points to the next node in the original order)
+        }
     }
 
     public void prepend(int value) {
