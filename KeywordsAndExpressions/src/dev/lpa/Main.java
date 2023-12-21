@@ -1,40 +1,22 @@
 package dev.lpa;
 
-import dev.lpa.domain.Employee;
-import dev.lpa.domain.StoreEmployee;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
     public static void main(String[] args) {
-        List<Employee> employees = new ArrayList<>(List.of(
-                new Employee(10001, "Ralph", 2015),
-                new Employee(10005, "Carole", 2021),
-                new Employee(10022, "Jane", 2013),
-                new Employee(13151, "Laura", 2020),
-                new Employee(10050, "Jim", 2018)
-        ));
+        List<String> list = new ArrayList<>(List.of("alpha", "bravo", "charlie", "delta"));
+        for (String s : list) System.out.println(s);
+        System.out.println("-------");
+        list.forEach(s -> System.out.println(s));
 
-
-        employees.sort(new Employee.EmployeeComparator<>("yearStarted").reversed());
-
-        for (Employee e : employees) System.out.println(e);
-
-        System.out.println("\nStore Members");
-
-        List<StoreEmployee> storeEmployees = new ArrayList<>(List.of(
-                new StoreEmployee(10015, "Meg", 2019, "Target"),
-                new StoreEmployee(10515, "Joe", 2021, "Walmart"),
-                new StoreEmployee(10105, "Tom", 2020, "K-Mart"),
-                new StoreEmployee(10215, "Marty", 2018, "Walmart"),
-                new StoreEmployee(10322, "Bud", 2016, "Target")
-        ));
-
-        var comparator = new StoreEmployee().new StoreComparator<>();
-        storeEmployees.sort(comparator);
-        for (StoreEmployee e : storeEmployees) System.out.println(e);
+        int result = calculator((a, b) -> a + b, 5, 2);
+        var result2 = calculator((a, b) -> a / b, 10.0, 2.5);
     }
 
+    public static <T> T calculator(Operation<T> function, T val1, T val2) {
+        T result = function.operate(val1, val2);
+        System.out.println("Operation Result: " + result);
+        return result;
+    }
 }
