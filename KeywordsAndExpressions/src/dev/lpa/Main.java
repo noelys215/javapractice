@@ -1,59 +1,36 @@
 package dev.lpa;
 
 
-import java.util.Arrays;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        String name = "Asuka ";
-        Function<String, String> uCase = String::toUpperCase;
-        System.out.println(uCase.apply(name));
-
-        Function<String, String> lastName = s -> s.concat(" Langley");
-        Function<String, String> uCaseLastName = uCase.andThen(lastName);
-        System.out.println(uCaseLastName.apply(name));
-
-        uCaseLastName = uCase.compose(lastName);
-        System.out.println(uCaseLastName.apply(name));
-
-        Function<String, String[]> f0 = uCase
-                .andThen(s -> s.concat("Langley"))
-                .andThen(s -> s.split(" "));
-        System.out.println("\n" + Arrays.toString(f0.apply(name)));
-
-        Function<String, String> f1 = uCase
-                .andThen(s -> s.concat("Langley"))
-                .andThen(s -> s.split(" "))
-                .andThen(s -> s[1].toUpperCase() + ", " + s[0]);
-        System.out.println("\n" + f1.apply(name));
 
 
-        Function<String, Integer> f2 = uCase
-                .andThen(s -> s.concat("Langley"))
-                .andThen(s -> s.split(" "))
-                .andThen(s -> s[1].toUpperCase() + ", " + s[0])
-                .andThen(s -> String.join(", ", s))
-                .andThen(String::length);
-        System.out.println("\n" + f2.apply(name));
-        System.out.println(" ");
-        String[] names = {"Shinji", "Asuka", "Rei"};
-        Consumer<String> s0 = s -> System.out.print(s.charAt(0));
-        Consumer<String> s1 = System.out::println;
+        Card[] cardArray = new Card[13];
+        Card aceOfHearts = Card.getFaceCard(Card.Suit.HEART, 'A');
+        Arrays.fill(cardArray, aceOfHearts);
+        Card.printDeck(Arrays.asList(cardArray), "Ace of Hearts", 1);
 
-        Arrays.asList(names).forEach(s0
-                .andThen(s -> System.out.print(" - "))
-                .andThen(s1));
+        List<Card> cards = new ArrayList<>(52);
+        Collections.fill(cards, aceOfHearts);
+        System.out.println(cards);
+        System.out.println("cards.size(): " + cards.size());
 
-        Predicate<String> p1 = s -> s.equals("Asuka");
-        Predicate<String> p2 = s -> s.equalsIgnoreCase("Asuka");
-        Predicate<String> p3 = s -> s.startsWith("A");
-        Predicate<String> p4 = s -> s.endsWith("a");
+        List<Card> acesOfHearts = Collections.nCopies(13, aceOfHearts);
+        Card.printDeck(acesOfHearts, "Aces of Hearts", 1);
 
-        Predicate<String> combined1 = p3.or(p4);
-        System.out.println("\n" + "Combined: " + combined1.test(name));
+        Card kingOfClubs = Card.getFaceCard(Card.Suit.CLUB, 'K');
+        List<Card> kingsOfClubs = Collections.nCopies(13, kingOfClubs);
+        Card.printDeck(kingsOfClubs, "King of Clubs", 1);
+
+        List<Card> deck = Card.getStandardDeck();
+        Card.printDeck(deck);
+
+        Collections.shuffle(deck);
+        Card.printDeck(deck, "Shuffled Deck:", 4);
+
+        Collections.reverse(deck);
+        Card.printDeck(deck, "Reversed Deck:", 4);
     }
-
 }
