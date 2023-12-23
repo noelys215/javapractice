@@ -1,46 +1,48 @@
 package dev.lpa;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public class Main {
-
     private static Random random = new Random();
 
-
     public static void main(String[] args) {
-        String[] names = {"Anna", "Bob", "Carole", "David", "Ed", "Ava", "Fred", "Gary"};
-
-        Arrays.setAll(names, i -> names[i].toUpperCase());
-        System.out.println("-> Uppercase");
-        System.out.println(Arrays.toString(names));
-
-        List<String> backedByArray = Arrays.asList(names);
-
-        backedByArray.replaceAll(s -> s += " " + getRandomChar('A', 'D') + ".");
-        System.out.println("-> Random Initial");
-        System.out.println(Arrays.toString(names));
-
-        backedByArray.replaceAll(s -> s += " " + getReversedName(s.split(" ")[0]));
-        System.out.println("-> Reverse Name as Last Name");
-        Arrays.asList(names).forEach(s -> System.out.println(s));
-
-        List<String> newList = new ArrayList<>(List.of(names));
-        newList.removeIf(s -> s.substring(0, s.indexOf(" ")).equals(
-                s.substring(s.lastIndexOf(" ") + 1)
-        ));
-        System.out.println("\n");
-        newList.forEach(s -> System.out.println(s));
+        String[] names = {"Shinji", "Asuka", "Rei", "Ava"};
+        List<UnaryOperator<String>> list = new ArrayList<>(
+                List.of(String::toUpperCase,
+                        s -> s += " " + getRandomChar('D', 'M') + ".",
+                        s -> s += " " + reverse(s, 0, s.indexOf(" ")),
+                        Main::reverse,
+                        String::new,
+                        s -> new String(s),
+                        String::valueOf
+                ));
+        applyChanges(names, list);
     }
 
-    public static char getRandomChar(char startChar, char endChar) {
+    private static void applyChanges(String[] names,
+                                     List<UnaryOperator<String>> stringFunctions) {
+        List<String> backedByArray = Arrays.asList(names);
+        for (var function : stringFunctions) {
+            backedByArray.replaceAll(s -> s.transform(function));
+            System.out.println(Arrays.toString(names));
+        }
+    }
+
+    private static char getRandomChar(char startChar, char endChar) {
         return (char) random.nextInt((int) startChar, (int) endChar + 1);
     }
 
-    private static String getReversedName(String firstName) {
-        return new StringBuilder(firstName).reverse().toString();
+    private static String reverse(String s) {
+        return reverse(s, 0, s.length());
+    }
+
+    private static String reverse(String s, int start, int end) {
+        return new StringBuilder(s.substring(start, end)).reverse().toString();
     }
 
 }
