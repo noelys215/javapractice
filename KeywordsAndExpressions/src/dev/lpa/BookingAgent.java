@@ -8,16 +8,17 @@ public class BookingAgent {
         Theatre rodgersNYC = new Theatre("Richard Rodgers",
                 rows, totalSeats);
 
-        rodgersNYC.printSeatMap();
-
-        bookSeat(rodgersNYC, 'A', 3);
+/*
         bookSeat(rodgersNYC, 'A', 3);
 
         bookSeat(rodgersNYC, 'B', 1);
-        bookSeat(rodgersNYC, 'B', 11);
-        bookSeat(rodgersNYC, 'M', 1);
 
+ */
         bookSeats(rodgersNYC, 4, 'B', 3, 10);
+        bookSeat(rodgersNYC, 'M', 1);
+        bookSeat(rodgersNYC, 'B', 11);
+        bookSeat(rodgersNYC, 'A', 3);
+        rodgersNYC.printSeatMap();
     }
 
     private static void bookSeat(Theatre theatre, char row, int seatNo) {
