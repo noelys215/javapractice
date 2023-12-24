@@ -1,6 +1,7 @@
 package dev.lpa;
 
 import java.util.NavigableSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Theatre {
@@ -50,7 +51,7 @@ public class Theatre {
         int index = 0;
         for (Seat s : seats) {
             System.out.printf("%-8s%s",
-                    s.seatNum + ((s.reserved) ? "(\u25CF)" : ""),
+                    s.seatNum + ((s.reserved) ? "(●)" : ""),
                     ((index++ + 1) % seatsPerRow == 0) ? "\n" : "");
         }
         System.out.println(separatorLine);
@@ -74,5 +75,50 @@ public class Theatre {
             }
         }
         return null;
+    }
+
+    private boolean validate(int count, char first, char last, int min, int max) {
+        boolean res = (min > 0 || seatsPerRow >= count || (max - min + 1) >= count);
+        res = res && seats.contains((new Seat(first, min)));
+        if (!res) {
+            System.out.printf("Invalid! %1$d seats between " + "%2$c[%3$d-%4$d]-%5$c[%3$d-%4$d] Try Again",
+                    count, first, min, max, last
+            );
+            System.out.printf(": Seat must be between %s and %s%n",
+                    seats.first().seatNum, seats.last().seatNum);
+        }
+        return res;
+    }
+
+    public Set<Seat> reservedSeats(int count, char minRow, char maxRow, int minSeat, int maxSeat) {
+        char lastValid = seats.last().seatNum.charAt(0);
+        maxRow = (maxRow < lastValid) ? maxRow : lastValid;
+        if (!validate(count, minRow, maxRow, minSeat, maxSeat)) return null;
+        NavigableSet<Seat> selected = null;
+        for (char letter = minRow; letter <= maxRow; letter++) {
+            NavigableSet<Seat> contiguous = seats.subSet(
+                    new Seat(letter, minSeat), true,
+                    new Seat(letter, maxSeat), true);
+            int index = 0;
+            Seat first = null;
+            for (Seat cur : contiguous) {
+                if (cur.reserved) {
+                    index = 0;
+                    continue;
+                }
+                first = (index == 0) ? cur : first;
+                if (++index == count) {
+                    selected = contiguous.subSet(first, true, cur, true);
+                    break;
+                }
+            }
+            if (selected != null) break;
+        }
+        Set<Seat> reservedSeats = null;
+        if (selected != null) {
+            selected.forEach(s -> s.reserved = true);
+            reservedSeats = new TreeSet<>(selected);
+        }
+        return reservedSeats;
     }
 }
