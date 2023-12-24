@@ -5,32 +5,53 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
-
         Card[] cardArray = new Card[13];
         Card aceOfHearts = Card.getFaceCard(Card.Suit.HEART, 'A');
         Arrays.fill(cardArray, aceOfHearts);
-        Card.printDeck(Arrays.asList(cardArray), "Ace of Hearts", 1);
 
         List<Card> cards = new ArrayList<>(52);
         Collections.fill(cards, aceOfHearts);
-        System.out.println(cards);
-        System.out.println("cards.size(): " + cards.size());
 
         List<Card> acesOfHearts = Collections.nCopies(13, aceOfHearts);
-        Card.printDeck(acesOfHearts, "Aces of Hearts", 1);
 
         Card kingOfClubs = Card.getFaceCard(Card.Suit.CLUB, 'K');
         List<Card> kingsOfClubs = Collections.nCopies(13, kingOfClubs);
-        Card.printDeck(kingsOfClubs, "King of Clubs", 1);
 
         List<Card> deck = Card.getStandardDeck();
-        Card.printDeck(deck);
 
         Collections.shuffle(deck);
-        Card.printDeck(deck, "Shuffled Deck:", 4);
 
         Collections.reverse(deck);
-        Card.printDeck(deck, "Reversed Deck:", 4);
+
+        var sortedAlgo = Comparator.comparing(Card::rank).thenComparing(Card::suit);
+        Collections.sort(deck, sortedAlgo);
+
+        Collections.reverse(deck);
+
+        List<Card> kings = new ArrayList<>(deck.subList(4, 8));
+
+        List<Card> tens = new ArrayList<>(deck.subList(16, 20));
+
+        int subListIndex = Collections.indexOfSubList(deck, tens);
+
+        boolean disjoint = Collections.disjoint(deck, tens);
+        deck.sort(sortedAlgo);
+        Card tenOfHearts = Card.getNumericCard(Card.Suit.HEART, 10);
+        int foundIndex = Collections.binarySearch(deck, tenOfHearts, sortedAlgo);
+
+
+        Card tenOfClubs = Card.getNumericCard(Card.Suit.CLUB, 10);
+        Collections.replaceAll(deck, tenOfClubs, tenOfHearts);
+
+        Collections.replaceAll(deck, tenOfHearts, tenOfClubs);
+
+        System.out.println("Best Card: " + Collections.max(deck, sortedAlgo));
+        System.out.println("Worst Card: " + Collections.min(deck, sortedAlgo));
+
+        List<Card> copied = new ArrayList<>(deck.subList(0, 13));
+        Collections.rotate(copied, 2);
+        System.out.println("UnRotated: " + deck.subList(0, 13));
+        System.out.println("Rotated " + 2 + ": " + copied);
+
     }
 }
