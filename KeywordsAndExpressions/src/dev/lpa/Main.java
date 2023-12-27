@@ -1,10 +1,11 @@
 package dev.lpa;
 
-public class Main {
+import java.util.Scanner;
 
+public class Main {
     public static void main(String[] args) {
-        String name;
-        int age;
-        String city;
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        System.out.println("Hello, " + name + "!");
     }
 }
